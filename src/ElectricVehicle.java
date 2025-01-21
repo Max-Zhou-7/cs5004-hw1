@@ -84,13 +84,6 @@ public class ElectricVehicle {
     return  this.stateOfCharge;
     }
 
-  /**
-   * Get current efficiency.
-   * return current efficiency
-   */
-  public double getEfficiency() {
-    return this.currentEfficiency;
-    }
 
   /**
    * set new value for state of charge.
@@ -99,13 +92,6 @@ public class ElectricVehicle {
     this.stateOfCharge = stateOfCharge;
     }
 
-  /**
-   * get the range for car can drive.
-    * @return range.
-   */
-  public double range() {
-    return getEfficiency() * getStateOfCharge() * getBatterySize();
-    }
 
   /**
    * get new efficiency based on current temperature.
@@ -127,6 +113,25 @@ public class ElectricVehicle {
 
       }
 
+  /**
+   * Get current efficiency.
+   * return current efficiency
+   */
+  public double getEfficiency() {
+    return this.currentEfficiency;
+  }
+
+
+  /**
+   * get the range for car can drive.
+   * @return range.
+   */
+  public double range() {
+    return getEfficiency() * getStateOfCharge() * getBatterySize();
+  }
+
+
+  
   /**
    * Override string
    * @return string
