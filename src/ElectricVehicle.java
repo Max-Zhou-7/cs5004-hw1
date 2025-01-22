@@ -48,10 +48,12 @@ public class ElectricVehicle {
    * @return clamped battery size
    */
   private double clampBatterySize(double batterySize) {
-    if (batterySize < 10) {
-      batterySize = 10;
-    } else if (batterySize > 150) {
-      batterySize = 150;
+    final int MinBatterySize = 10;
+    final int MaxBatterySize = 150;
+    if (batterySize < MinBatterySize) {
+      batterySize = MinBatterySize;
+    } else if (batterySize > MaxBatterySize) {
+      batterySize = MaxBatterySize;
     }
     return batterySize;
   }
@@ -70,10 +72,12 @@ public class ElectricVehicle {
    * @return clamped default efficiency.
    */
   private double clampDefaultEfficiency(double defaultEfficiency) {
-    if (defaultEfficiency < 0.5) {
-      defaultEfficiency = 0.5;
-    } else if (defaultEfficiency > 4.5) {
-      defaultEfficiency = 4.5;
+    final double MIN_DE = 0.5;
+    final double MAX_DE = 4.5;
+    if (defaultEfficiency < MIN_DE) {
+      defaultEfficiency = MIN_DE;
+    } else if (defaultEfficiency > MAX_DE) {
+      defaultEfficiency = MAX_DE;
     }
     return defaultEfficiency;
   }
@@ -99,10 +103,12 @@ public class ElectricVehicle {
    * @return clamped state of charge.
    */
   private double clampStateOfCharge(double stateOfCharge) {
-    if (stateOfCharge > 1.0) {
-      stateOfCharge = 1.0;
-    } else if (stateOfCharge < 0.15) {
-      stateOfCharge = 0.15;
+    final double MIN_SOC = 0.15;
+    final double MAX_SOC = 1.0;
+    if (stateOfCharge > MAX_SOC) {
+      stateOfCharge = MAX_SOC;
+    } else if (stateOfCharge < MIN_SOC) {
+      stateOfCharge = MIN_SOC;
     }
     return stateOfCharge;
   }
@@ -131,15 +137,20 @@ public class ElectricVehicle {
    * @param currentTemp currentTemp.
    */
   public void updateEfficiency(double currentTemp) {
-    if (currentTemp > 77.0) {
-      this.currentEfficiency = 0.85 * getDefaultEfficiency();
+    final double HOT_LIMIT = 77.0;
+    final double HOT_COE = 0.85;
+    final double UPPER_BOUND = 65.0;
+    final double LOWER_BOUND = 15.0;
+    final double LOWER_COE = 0.5;
+    if (currentTemp > HOT_LIMIT) {
+      this.currentEfficiency = HOT_COE * getDefaultEfficiency();
     }
-    else if (currentTemp < 65.0) {
-      if (currentTemp < 15.0) {
-        this.currentEfficiency = 0.5 * getDefaultEfficiency();
+    else if (currentTemp < UPPER_BOUND) {
+      if (currentTemp < LOWER_BOUND) {
+        this.currentEfficiency = LOWER_COE * getDefaultEfficiency();
       }
       else {
-        double diff = (65 - currentTemp) / 100;
+        double diff = (UPPER_BOUND - currentTemp) / 100;
         this.currentEfficiency = (1 - diff) * getDefaultEfficiency();
       }
     }
