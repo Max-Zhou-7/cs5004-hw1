@@ -16,10 +16,11 @@ public class testElectricVehicle {
    */
 
   @Before
-public void setup() {
+  public void setup() {
     a = new ElectricVehicle("",130.734534534, 0.07, 0.3);
     b = new ElectricVehicle("Xiaomi SU7", 10000.999, 100.99,4.5);
   }
+
   /**
    * Test get car name.
    */
