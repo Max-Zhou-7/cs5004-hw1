@@ -67,8 +67,8 @@ public void testGetStateOfCharge() {
 public void testGetEfficiency() {
   a.updateEfficiency(79);
   b.updateEfficiency(64.1234234);
-  assertEquals(0.85, a.getEfficiency(), delta);
-  assertEquals(0.99, b.getEfficiency(), delta);
+  assertEquals(0.85 * 0.5, a.getEfficiency(), delta);
+  assertEquals(0.99 * 4.5, b.getEfficiency(), delta);
 }
 
 /**

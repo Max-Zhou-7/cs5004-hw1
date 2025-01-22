@@ -46,7 +46,7 @@ public class ElectricVehicle {
    * @return clamped name
    */
   private String clampName(String name) {
-  if (name.isEmpty() || name == null) {
+  if (name == null || name.isEmpty()) {
     name = "unknown EV";
   }
   return name;
@@ -161,7 +161,7 @@ public class ElectricVehicle {
    * return current efficiency
    */
   public double getEfficiency() {
-    return this.currentEfficiency;
+    return (this.currentEfficiency) * this.defaultEfficiency;
   }
 
 
