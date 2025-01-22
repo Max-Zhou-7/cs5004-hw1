@@ -16,7 +16,7 @@ public class testElectricVehicle {
  */
 @Before
 public void setup() {
-  a = new ElectricVehicle(130.734534534, 0.07, 0.3);
+  a = new ElectricVehicle("",130.734534534, 0.07, 0.3);
   b = new ElectricVehicle("Xiaomi SU7", 10000.999, 100.99,4.5);
 }
 
@@ -81,19 +81,19 @@ public void testRange() {
 }
 
 
-///**
-// * test get toString.
-// */
-//@Test
-//public void testString() {
-//  a.setStateOfCharge(0.856);
-//  b.setStateOfCharge(0.0723);
-//  a.updateEfficiency(79);
-//  b.updateEfficiency(64.1234234);
-//  assertEquals("unknown EV SOC: 85.6% Range (miles): 95.1", a.toString());
-//  assertEquals("Xiaomi SU7 SOC: 15.0% Range (miles): 22.3", b.toString());
-//}
-//
+/**
+ * test get toString.
+ */
+@Test
+public void testString() {
+  a.setStateOfCharge(0.856);
+  b.setStateOfCharge(0.0723);
+  a.updateEfficiency(79);
+  b.updateEfficiency(64.1234234);
+  assertEquals("unknown EV SOC: 85.6% Range (miles): 95.1", a.toString());
+  assertEquals("Xiaomi SU7 SOC: 15.0% Range (miles): 22.3", b.toString());
+}
+
 
 
 

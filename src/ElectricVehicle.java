@@ -10,18 +10,19 @@ public class ElectricVehicle {
     private double currentEfficiency;
     private double defaultEfficiency;
 
-  /**
-   * default constructor.
-   * @param batterySize batterySize
-   * @param stateOfCharge state of charge
-   * @param defaultEfficiency default efficiency
-   */
-  public ElectricVehicle(double batterySize, double stateOfCharge, double defaultEfficiency) {
-    this.name = "unknown EV";
-    this.batterySize = batterySize;
-    this.stateOfCharge = stateOfCharge;
-    this.defaultEfficiency = defaultEfficiency;
-}
+//  /**
+//   * default constructor.
+//   * @param batterySize batterySize
+//   * @param stateOfCharge state of charge
+//   * @param defaultEfficiency default efficiency
+//   */
+//  public ElectricVehicle(double batterySize, double stateOfCharge, double defaultEfficiency) {
+//    this.name = "unknown EV";
+//    this.batterySize = batterySize;
+//    this.stateOfCharge = stateOfCharge;
+//    this.defaultEfficiency = defaultEfficiency;
+//    this.currentEfficiency = defaultEfficiency;
+//}
 
   /**
    * customize constructor.
@@ -31,36 +32,68 @@ public class ElectricVehicle {
    * @param defaultEfficiency default efficiency
    */
   public ElectricVehicle(String name, double batterySize, double stateOfCharge, double defaultEfficiency) {
-    this.name = name;
-    this.batterySize = batterySize;
-    this.stateOfCharge = stateOfCharge;
-    this.defaultEfficiency = defaultEfficiency;
+    this.name = clampName(name);
+    this.batterySize = clampBatterySize(batterySize);
+    this.stateOfCharge = clampStateOfCharge(stateOfCharge);
+    this.defaultEfficiency = clampDefaultEfficiency(defaultEfficiency);
+    this.currentEfficiency = clampDefaultEfficiency(defaultEfficiency);
+  }
+
+
+  /**
+   * clamp name.
+   * @param name
+   * @return clamped name
+   */
+  private String clampName(String name) {
+  if (name.isEmpty() || name == null) {
+    name = "unknown EV";
+  }
+  return name;
+
+}
+
+
+  /**
+   * clamp the battery size.
+   * @return clamped battery size
+   */
+  private double clampBatterySize(double batterySize) {
+    if(batterySize < 10) {
+      batterySize = 10;
+    } else if (batterySize > 150) {
+      batterySize = 150;
+    }
+    return batterySize;
   }
 
   /**
    * get the battery size.
    * @return battery size.
    */
-  public double getBatterySize(){
-      if(this.batterySize < 10) {
-        this.batterySize = 10;
-      } else if (this.batterySize > 150) {
-        this.batterySize = 150;
-      }
-    return this.batterySize;
+  public double getBatterySize() {
+      return this.batterySize;
 
   }
 
   /**
+   * clamp default efficiency.
+   * @return clamped default efficiency.
+   */
+  public double clampDefaultEfficiency(double defaultEfficiency) {
+    if (defaultEfficiency < 0.5) {
+      defaultEfficiency = 0.5;
+    } else if (defaultEfficiency > 4.5) {
+      defaultEfficiency = 4.5;
+    }
+    return defaultEfficiency;
+  }
+
+  /**
    * get default efficiency.
-   * @return default efficiency.
+   * @return default efficiency
    */
   public double getDefaultEfficiency() {
-    if (this.defaultEfficiency < 0.5) {
-      this.defaultEfficiency = 0.5;
-    } else if (this.defaultEfficiency > 4.5) {
-      this.defaultEfficiency = 4.5;
-    }
     return this.defaultEfficiency;
   }
   /**
@@ -72,24 +105,34 @@ public class ElectricVehicle {
   }
 
   /**
-   * Get current state of charge.
-   * @return state of charge.
+   * clamp current state of charge.
+   * @return clamped state of charge.
+   */
+  public double clampStateOfCharge(double stateOfCharge) {
+    if (stateOfCharge > 1.0) {
+      stateOfCharge = 1.0;
+    } else if (stateOfCharge < 0.15) {
+      stateOfCharge = 0.15;
+    }
+    return stateOfCharge;
+    }
+
+  /**
+   * get current state of charge.
+   * @return current state of charge.
    */
   public double getStateOfCharge() {
-    if (this.stateOfCharge > 1.0) {
-      this.stateOfCharge = 1.0;
-    } else if (this.stateOfCharge < 0.15) {
-      this.stateOfCharge = 0.15;
-    }
-    return  this.stateOfCharge;
-    }
+    return this.stateOfCharge;
+  }
+
+
 
 
   /**
    * set new value for state of charge.
    */
   public void setStateOfCharge(double stateOfCharge) {
-    this.stateOfCharge = stateOfCharge;
+    this.stateOfCharge = clampStateOfCharge(stateOfCharge);
     }
 
 
@@ -131,7 +174,7 @@ public class ElectricVehicle {
   }
 
 
-  
+
   /**
    * Override string
    * @return string
