@@ -80,7 +80,7 @@ public class ElectricVehicle {
    * clamp default efficiency.
    * @return clamped default efficiency.
    */
-  public double clampDefaultEfficiency(double defaultEfficiency) {
+  private double clampDefaultEfficiency(double defaultEfficiency) {
     if (defaultEfficiency < 0.5) {
       defaultEfficiency = 0.5;
     } else if (defaultEfficiency > 4.5) {
@@ -108,7 +108,7 @@ public class ElectricVehicle {
    * clamp current state of charge.
    * @return clamped state of charge.
    */
-  public double clampStateOfCharge(double stateOfCharge) {
+  private double clampStateOfCharge(double stateOfCharge) {
     if (stateOfCharge > 1.0) {
       stateOfCharge = 1.0;
     } else if (stateOfCharge < 0.15) {
@@ -142,26 +142,36 @@ public class ElectricVehicle {
    */
   public void updateEfficiency(double currentTemp) {
       if (currentTemp > 77.0) {
-        this.currentEfficiency = 0.85;
+        this.currentEfficiency = 0.85 * defaultEfficiency;
       }
       else if(currentTemp < 65.0) {
         if(currentTemp < 15.0) {
-          this.currentEfficiency = 0.5;
+          this.currentEfficiency = 0.5 * defaultEfficiency;
         }
         else{
           double diff = (65 - currentTemp) / 100;
-        this.currentEfficiency = 1 - diff;
+        this.currentEfficiency = (1 - diff) * defaultEfficiency;
         }
       }
 
       }
 
+//      private double clampCurrentEfficiency(double temperature) {
+//        if (null != temperature) {
+//          updateEfficiency(temperature);
+//          return this.currentEfficiency * getDefaultEfficiency();
+//        else{
+//            return this.currentEfficiency;
+//          }
+//
+//      }
+//  }
   /**
    * Get current efficiency.
    * return current efficiency
    */
   public double getEfficiency() {
-    return (this.currentEfficiency) * getDefaultEfficiency();
+      return this.currentEfficiency;
   }
 
 
