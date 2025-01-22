@@ -14,7 +14,8 @@ public class testElectricVehicle {
 /**
  * set up for car a and b.
  */
-@Before
+
+  @Before
 public void setup() {
   a = new ElectricVehicle("",130.734534534, 0.07, 0.3);
   b = new ElectricVehicle("Xiaomi SU7", 10000.999, 100.99,4.5);

@@ -4,25 +4,13 @@ import java.text.DecimalFormat;
  * create the class of EV.
  */
 public class ElectricVehicle {
-    private String name;
-    private double batterySize;
-    private double stateOfCharge;
-    private double currentEfficiency;
-    private double defaultEfficiency;
+  private String name;
+  private double batterySize;
+  private double stateOfCharge;
+  private double currentEfficiency;
+  private double defaultEfficiency;
 
-//  /**
-//   * default constructor.
-//   * @param batterySize batterySize
-//   * @param stateOfCharge state of charge
-//   * @param defaultEfficiency default efficiency
-//   */
-//  public ElectricVehicle(double batterySize, double stateOfCharge, double defaultEfficiency) {
-//    this.name = "unknown EV";
-//    this.batterySize = batterySize;
-//    this.stateOfCharge = stateOfCharge;
-//    this.defaultEfficiency = defaultEfficiency;
-//    this.currentEfficiency = defaultEfficiency;
-//}
+
 
   /**
    * customize constructor.
@@ -142,30 +130,19 @@ public class ElectricVehicle {
    */
   public void updateEfficiency(double currentTemp) {
       if (currentTemp > 77.0) {
-        this.currentEfficiency = 0.85 * defaultEfficiency;
+        this.currentEfficiency = 0.85 * getDefaultEfficiency();
       }
       else if(currentTemp < 65.0) {
         if(currentTemp < 15.0) {
-          this.currentEfficiency = 0.5 * defaultEfficiency;
+          this.currentEfficiency = 0.5 * getDefaultEfficiency();
         }
         else{
           double diff = (65 - currentTemp) / 100;
-        this.currentEfficiency = (1 - diff) * defaultEfficiency;
+        this.currentEfficiency = (1 - diff) * getDefaultEfficiency();
         }
       }
-
       }
 
-//      private double clampCurrentEfficiency(double temperature) {
-//        if (null != temperature) {
-//          updateEfficiency(temperature);
-//          return this.currentEfficiency * getDefaultEfficiency();
-//        else{
-//            return this.currentEfficiency;
-//          }
-//
-//      }
-//  }
   /**
    * Get current efficiency.
    * return current efficiency
