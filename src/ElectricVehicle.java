@@ -140,7 +140,7 @@ public class ElectricVehicle {
       }
       else {
         double diff = (65 - currentTemp) / 100;
-      this.currentEfficiency = (1 - diff) * getDefaultEfficiency();
+        this.currentEfficiency = (1 - diff) * getDefaultEfficiency();
       }
     }
   }
