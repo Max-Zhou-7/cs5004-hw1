@@ -19,7 +19,8 @@ public class ElectricVehicle {
    * @param stateOfCharge state of charge
    * @param defaultEfficiency default efficiency
    */
-  public ElectricVehicle(String name, double batterySize, double stateOfCharge, double defaultEfficiency) {
+  public ElectricVehicle(String name, double batterySize, double stateOfCharge,
+                         double defaultEfficiency) {
     this.name = clampName(name);
     this.batterySize = clampBatterySize(batterySize);
     this.stateOfCharge = clampStateOfCharge(stateOfCharge);
@@ -30,16 +31,16 @@ public class ElectricVehicle {
 
   /**
    * clamp name.
-   * @param name
+   * @param name name
    * @return clamped name
    */
   private String clampName(String name) {
-  if (name == null || name.isEmpty()) {
-    name = "unknown EV";
-  }
-  return name;
+    if (name == null || name.isEmpty()) {
+      name = "unknown EV";
+    }
+    return name;
 
-}
+  }
 
 
   /**
@@ -47,7 +48,7 @@ public class ElectricVehicle {
    * @return clamped battery size
    */
   private double clampBatterySize(double batterySize) {
-    if(batterySize < 10) {
+    if (batterySize < 10) {
       batterySize = 10;
     } else if (batterySize > 150) {
       batterySize = 150;
@@ -60,7 +61,7 @@ public class ElectricVehicle {
    * @return battery size.
    */
   public double getBatterySize() {
-      return this.batterySize;
+    return this.batterySize;
 
   }
 
@@ -84,6 +85,7 @@ public class ElectricVehicle {
   public double getDefaultEfficiency() {
     return this.defaultEfficiency;
   }
+
   /**
    * Get name.
    * @return name.
@@ -103,7 +105,7 @@ public class ElectricVehicle {
       stateOfCharge = 0.15;
     }
     return stateOfCharge;
-    }
+  }
 
   /**
    * get current state of charge.
@@ -121,7 +123,7 @@ public class ElectricVehicle {
    */
   public void setStateOfCharge(double stateOfCharge) {
     this.stateOfCharge = clampStateOfCharge(stateOfCharge);
-    }
+  }
 
 
   /**
@@ -129,26 +131,26 @@ public class ElectricVehicle {
    * @param currentTemp currentTemp.
    */
   public void updateEfficiency(double currentTemp) {
-      if (currentTemp > 77.0) {
-        this.currentEfficiency = 0.85 * getDefaultEfficiency();
+    if (currentTemp > 77.0) {
+      this.currentEfficiency = 0.85 * getDefaultEfficiency();
+    }
+    else if (currentTemp < 65.0) {
+      if (currentTemp < 15.0) {
+        this.currentEfficiency = 0.5 * getDefaultEfficiency();
       }
-      else if(currentTemp < 65.0) {
-        if(currentTemp < 15.0) {
-          this.currentEfficiency = 0.5 * getDefaultEfficiency();
-        }
-        else{
-          double diff = (65 - currentTemp) / 100;
-        this.currentEfficiency = (1 - diff) * getDefaultEfficiency();
-        }
+      else {
+        double diff = (65 - currentTemp) / 100;
+      this.currentEfficiency = (1 - diff) * getDefaultEfficiency();
       }
-      }
+    }
+  }
 
   /**
    * Get current efficiency.
    * return current efficiency
    */
   public double getEfficiency() {
-      return this.currentEfficiency;
+    return this.currentEfficiency;
   }
 
 
@@ -163,14 +165,14 @@ public class ElectricVehicle {
 
 
   /**
-   * Override string
+   * Override string.
    * @return string
    */
   public String toString() {
     DecimalFormat percentFormat = new DecimalFormat("0.0%");
     DecimalFormat rangeFormat = new DecimalFormat("0.0");
-    return this.name + " SOC: " + percentFormat.format(getStateOfCharge()) +
-            " Range (miles): " + rangeFormat.format(range());
+    return this.name + " SOC: " + percentFormat.format(getStateOfCharge())
+            + " Range (miles): " + rangeFormat.format(range());
   }
 }
 
