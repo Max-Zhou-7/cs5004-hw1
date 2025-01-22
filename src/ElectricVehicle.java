@@ -161,7 +161,7 @@ public class ElectricVehicle {
    * return current efficiency
    */
   public double getEfficiency() {
-    return (this.currentEfficiency) * this.defaultEfficiency;
+    return this.currentEfficiency;
   }
 
 

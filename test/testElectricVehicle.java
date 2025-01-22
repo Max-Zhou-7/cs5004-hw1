@@ -91,7 +91,7 @@ public void testString() {
   a.updateEfficiency(79);
   b.updateEfficiency(64.1234234);
   assertEquals("unknown EV SOC: 85.6% Range (miles): 95.1", a.toString());
-  assertEquals("Xiaomi SU7 SOC: 15.0% Range (miles): 22.3", b.toString());
+  assertEquals("Xiaomi SU7 SOC: 15.0% Range (miles): 47.6", b.toString());
 }
 
 
